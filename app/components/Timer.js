@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import {View } from 'react-native';
+import { formatTimeToString } from './TimerHelper';
 
 class Timer extends Component {
   // create a timer that can be initalized, set, ran and destroyed seemlessly
@@ -19,13 +20,15 @@ super(props);
 this.state = {
   active: false, //determines if timer is active and ready to start
   started: false,
-  remainingTime: props.totalDuration,
+  timeLeft: props.totalDuration,
 };
 
-this.start = this.start.bind(this);
-this.stop = this.stopTimer.bind(this);
-this.reset = this.reset.bind(this);
-this.timeLeft this.timeLeft.bind(this);
+this.createTimer = this.createTimer.bind(this);
+this.startTimer = this.startTimer.bind(this);
+this.stopTimer = this.stopTimer.bind(this);
+//this.resetTimer = this.resetTimer.bind(this);
+
+
 const width = 150;
 this.defaultStyles = {
   container: {
@@ -84,11 +87,10 @@ removeTimer() {
   //TODO: Implement logic if timer is told to remove
 }
 
-resetTimer(...) {
+//resetTimer(...) {
   // TODO:
   // I do not believe this function will be implemented at first.
-
-}
+//}
 /*
 
 */
