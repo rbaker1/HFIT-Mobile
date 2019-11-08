@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { View } from "react-native";
 import { formatTimeToString } from "./TimerHelper";
 
-class Timer extends Component {
+class Timer extends PureComponent {
   // create a timer that can be initalized, set, ran and destroyed seemlessly
   // CLASS DOES NOT COMPILE YET
   static propTypes = {
@@ -19,7 +19,7 @@ class Timer extends Component {
     super(props);
     this.state = {
       active: false, //determines if timer is active and ready to start
-      started: false,
+      started: this.props.start,
       timeLeft: props.totalDuration
     };
 
@@ -46,7 +46,23 @@ class Timer extends Component {
 
   componentDidMount() {
     if (this.props.start) {
-      this.start();
+      this.startTimer();
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    //DONE FOR NOW, no reset functionality
+    if (nextProps.start !== prevState.start) {
+      return { start: nextProps.start };
+    }
+    //CONSIDER RESET
+    else return null; // look at
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    //DONE FOR NOW, no reset functionality
+    if (prevProps.start !== this.state.started) {
+      this.startTimer(); // see if this can handle state
     }
   }
 
@@ -62,7 +78,7 @@ class Timer extends Component {
 
     getTime === "function" && getTime(formattedTime);
 
-    return forattedTime;
+    return formattedTime;
   }
 
   createTimer() {
@@ -71,11 +87,26 @@ class Timer extends Component {
 
   startTimer() {
     // TODO: Implement timer to start counting down
+    const handleFinish = this.props.handleFinish
+      ? this.props.handleFinish
+      : () => alert("DEBUG: Timer finished");
+    const finishedTime = new Date().getTime() + this.state.timeLeft;
+    this.interval = setInterval(() => {
+      const timeRemaining = finishedTime - new Date();
+      if (timeRemaining <= 1000) {
+        this.setState({ timeLeft: 0 });
+        this.stopTimer();
+        handleFinish();
+        return;
+      }
+      this.setState({ timeLeft: timeRemaining });
+    }, 1);
   }
 
   stopTimer() {
     // TODO:
     // Tell timer to stop
+    clearInterval(this.interval);
   }
 
   removeTimer() {
@@ -89,5 +120,15 @@ class Timer extends Component {
   /*
 
 */
-  render() {}
+  render() {
+    const styles = this.props.options ? this.props.options : this.defaultStyles;
+
+    return (
+      <View style={styles.container}>
+        <Text style={styles.text}>{this.formatTime()}</Text>
+      </View>
+    );
+  }
 }
+
+export default Timer;
