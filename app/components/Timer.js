@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { View } from "react-native";
+import { View, Text, Button, Alert } from "react-native";
 import { formatTimeToString } from "./TimerHelper";
 
 class Timer extends PureComponent {
@@ -40,6 +40,9 @@ class Timer extends PureComponent {
         fontSize: 16,
         color: "#FFF",
         marginLeft: 7
+      },
+      button: {
+        color: "#ff0000"
       }
     };
   }
@@ -91,7 +94,7 @@ class Timer extends PureComponent {
       ? this.props.handleFinish
       : () => alert("DEBUG: Timer finished");
     const finishedTime = new Date().getTime() + this.state.timeLeft;
-    this.interval = setInterval(() => {
+    this.interval = setTimeout(() => {
       const timeRemaining = finishedTime - new Date();
       if (timeRemaining <= 1000) {
         this.setState({ timeLeft: 0 });
@@ -107,6 +110,7 @@ class Timer extends PureComponent {
     // TODO:
     // Tell timer to stop
     clearInterval(this.interval);
+    this.setState({ started: false });
   }
 
   removeTimer() {
@@ -120,12 +124,37 @@ class Timer extends PureComponent {
   /*
 
 */
+
+  renderDebugInfo() {
+    return null;
+  }
+
+  renderTime() {
+    //Render only time
+    return null;
+  }
+
+  renderStartTouchable() {
+    return null;
+  }
+
+  renderResetTouchable() {
+    return null;
+  }
   render() {
+    // Just for early testing...
     const styles = this.props.options ? this.props.options : this.defaultStyles;
 
     return (
       <View style={styles.container}>
         <Text style={styles.text}>{this.formatTime()}</Text>
+        <Button
+          title="Start"
+          className
+          color={styles.button}
+          onPress={() => this.setState({ active: true, started: true })}
+        />
+        <Text style={styles.text}> {this.state.started.toString()} </Text>
       </View>
     );
   }
