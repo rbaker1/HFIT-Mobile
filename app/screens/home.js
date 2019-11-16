@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Alert, TouchableHighlight} from 'react-native';
 import { Layout, Text, Button, Icon } from 'react-native-ui-kitten';
+import Timer from '../components/Timer';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Svg, { Circle } from 'react-native-svg';
 
@@ -8,40 +9,32 @@ export class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fill: 100,
+      duration: 8000
     };
   }
 
-  componentDidMount(){
-    this.refs.circularProgress.animate(100, 8000);
+  _renderStopStartButtons() {
+    return (
+      <Layout style={styles.buttonContainer}>
+        <Button style={styles.button} icon={StartIcon} />
+        <Button style={styles.button} icon={SyncIcon} />
+      </Layout>
+    )
   }
 
   render() {
     return (
-      <Layout style={styles.container}>
-        <AnimatedCircularProgress
-          size={200}
-          width={3}
-          fill={this.state.fill}
-          tintColor="#00e0ff"
-          backgroundColor="#3d5875"
-          ref='circularProgress'>
-          {
-            (fill) => (
-              <Text>
-                00:08.00
-              </Text>
-            )
-          }
-        </AnimatedCircularProgress>
-        <Layout style={styles.buttonWrapper}>
-          <StartButton style={styles.button} />
-          <SyncButton style={styles.button}git checkou />
+      <Layout style={styles.mainContainer}>
+        <Timer
+        active = {false}
+        start = {false}
+        totalDuration = {this.state.duration} />
+        <Layout>
+          {this._renderStopStartButtons()}
         </Layout>
       </Layout>
     );
   }
-
 }
 
 const StartIcon = (style) => (
@@ -60,28 +53,12 @@ const SyncIcon = (style) => (
   <Icon name='sync' {...style} />
 );
 
-const StartButton = () => (
-  <Button icon={StartIcon} />
-);
-
-const StopButton = () => (
-  <Button icon={StopIcon} />
-);
-
-const PauseButton = () => (
-  <Button icon={PauseIcon} />
-);
-
-const SyncButton = () => (
-  <Button icon={SyncIcon} />
-);
-
 const styles = StyleSheet.create({
   headerContainer: {
     paddingTop: 10,
     paddingBottom: 10,
   },
-  container: {
+  mainContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
@@ -89,14 +66,14 @@ const styles = StyleSheet.create({
   text: {
     marginVertical: 16
   },
-  buttonWrapper: {
+  buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingTop: 15,
-    paddingBottom: 30,
+    flexWrap: 'wrap',
+    paddingVertical: 4,
+    paddingHorizontal: 4,
   },
   button: {
-    paddingLeft: 30,
-    paddingRight: 30,
-  }
+    marginVertical: 4,
+    marginHorizontal: 4,
+  },
 });
