@@ -5,12 +5,13 @@ import { Layout } from 'react-native-ui-kitten';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from "react-navigation"
 
+import Styles from '../styles/styles';
 import { HomeScreen } from '../screens/home'
 import { ManageScreen } from '../screens/manage'
 
 // Creating app header
 export const Header = () => (
-  <Layout style={styles.headerContainer}>
+  <Layout style={Styles.headerContainer}>
     <TopNavigation
       title='Handsfree Fitness'
       alignment='center'
@@ -45,10 +46,3 @@ const BottomTabNavigator = createBottomTabNavigator({
   });
 
 export const BottomNav = createAppContainer(BottomTabNavigator)
-
-const styles = StyleSheet.create({
-  headerContainer: {
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
-});

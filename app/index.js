@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { mapping, dark as darkTheme } from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { ApplicationProvider, IconRegistry, Layout, Text } from 'react-native-ui-kitten';
+import { ApplicationProvider, IconRegistry } from 'react-native-ui-kitten';
 
 import { Header, BottomNav } from './navigation/navigation'
 
