@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Alert, TouchableHighlight} from 'react-native';
-import { Layout, Text, Button, Icon } from 'react-native-ui-kitten';
+import { Layout, Button, Icon } from 'react-native-ui-kitten';
+
+import Styles from '../styles/styles';
 import Timer from '../components/Timer';
-import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import Svg, { Circle } from 'react-native-svg';
 
 export class HomeScreen extends Component {
   constructor(props) {
@@ -15,16 +14,16 @@ export class HomeScreen extends Component {
 
   _renderStopStartButtons() {
     return (
-      <Layout style={styles.buttonContainer}>
-        <Button style={styles.button} icon={StartIcon} />
-        <Button style={styles.button} icon={SyncIcon} />
+      <Layout style={Styles.buttonContainer}>
+        <Button style={Styles.button} icon={StartIcon} />
+        <Button style={Styles.button} icon={SyncIcon} />
       </Layout>
     )
   }
 
   render() {
     return (
-      <Layout style={styles.mainContainer}>
+      <Layout style={Styles.mainContainer}>
         <Timer
         active = {false}
         start = {false}
@@ -52,28 +51,3 @@ const PauseIcon = (style) => (
 const SyncIcon = (style) => (
   <Icon name='sync' {...style} />
 );
-
-const styles = StyleSheet.create({
-  headerContainer: {
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
-  mainContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  text: {
-    marginVertical: 16
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    paddingVertical: 4,
-    paddingHorizontal: 4,
-  },
-  button: {
-    marginVertical: 4,
-    marginHorizontal: 4,
-  },
-});
