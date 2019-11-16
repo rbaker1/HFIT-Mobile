@@ -5,12 +5,6 @@ import { ApplicationProvider, IconRegistry, Layout, Text } from 'react-native-ui
 
 import { Header, BottomNav } from './navigation/navigation'
 
-const ApplicationContent = () => (
-  <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    <Text>Welcome to UI Kitten</Text>
-  </Layout>
-);
-
 const App = () => (
   <React.Fragment>
     <IconRegistry icons={EvaIconsPack} />

@@ -18,7 +18,7 @@ export const Header = () => (
   </Layout>
 );
 
-export const BottomNavigationOverride = (props) => {
+const BottomNavigationOverride = (props) => {
 
  const onTabSelect = (selectedIndex) => {
    const { [selectedIndex]: selectedRoute } = props.navigation.state.routes;
