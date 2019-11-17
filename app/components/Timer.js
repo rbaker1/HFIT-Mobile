@@ -126,39 +126,35 @@ class Timer extends PureComponent {
 
   renderTime() {
     //Render only time
-    const styles = this.props.options ? this.props.options: this.defaultStyles;
+    const styles = this.props.options ? this.props.options : this.defaultStyles;
 
-    return (
-      <Text style={styles.text}>{this.formatTime()}</Text>
-    );
+    return <Text style={styles.text}>{this.formatTime()}</Text>;
   }
 
   renderStartTouchable() {
     //TODO: Probably have to change to TouchableOpacity
     return (
-      <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'horizontal'}}>
-      <Button
-        title="Start"
-        className
-        color={styles.button}
-        onPress={() => this.setState({ active: true, started: true })}
-      />
-      <Button
-        title="Reset"
-        className
-        color={styles.button}
-        onPress={() => this.setState({ active: true, started: false })}
-      />
+      <Layout
+        style={{ flex: 1, justifyContent: "center", alignItems: "horizontal" }}
+      >
+        <Button
+          title="Start"
+          className
+          color={styles.button}
+          onPress={() => this.setState({ active: true, started: true })}
+        />
+        <Button
+          title="Reset"
+          className
+          color={styles.button}
+          onPress={() => this.setState({ active: true, started: false })}
+        />
       </Layout>
-
     );
   }
 
   renderResetTouchable() {
     //TODO: Probably have to change to TouchableOpacity
-      return (
-
-    );
   }
   render() {
     // Just for early testing...
@@ -166,8 +162,7 @@ class Timer extends PureComponent {
 
     return (
       <View style={styles.container}>
-      // timer text
-      //start button
+        // timer text //start button
         <Text style={styles.text}> {this.state.started.toString()} </Text>
         <Text style={styles.text}> {this.interval} </Text>
       </View>
