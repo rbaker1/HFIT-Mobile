@@ -105,7 +105,6 @@ class Timer extends PureComponent {
     // TODO:
     // Tell timer to stop
     clearInterval(this.interval);
-    this.start: false;
     this.setState({ started: false });
   }
 
