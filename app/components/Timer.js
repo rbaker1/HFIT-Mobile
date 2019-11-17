@@ -23,7 +23,6 @@ class Timer extends PureComponent {
       timeLeft: props.totalDuration
     };
 
-    this.createTimer = this.createTimer.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
     //this.resetTimer = this.resetTimer.bind(this);
@@ -84,10 +83,6 @@ class Timer extends PureComponent {
     return formattedTime;
   }
 
-  createTimer() {
-    //TODO: handle beginning behavior once timer is created
-  }
-
   startTimer() {
     // TODO: Implement timer to start counting down
     const handleFinish = this.props.handleFinish
@@ -110,6 +105,7 @@ class Timer extends PureComponent {
     // TODO:
     // Tell timer to stop
     clearInterval(this.interval);
+    this.start: false;
     this.setState({ started: false });
   }
 
@@ -131,15 +127,39 @@ class Timer extends PureComponent {
 
   renderTime() {
     //Render only time
-    return null;
+    const styles = this.props.options ? this.props.options: this.defaultStyles;
+
+    return (
+      <Text style={styles.text}>{this.formatTime()}</Text>
+    );
   }
 
   renderStartTouchable() {
-    return null;
+    //TODO: Probably have to change to TouchableOpacity
+    return (
+      <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'horizontal'}}>
+      <Button
+        title="Start"
+        className
+        color={styles.button}
+        onPress={() => this.setState({ active: true, started: true })}
+      />
+      <Button
+        title="Reset"
+        className
+        color={styles.button}
+        onPress={() => this.setState({ active: true, started: false })}
+      />
+      </Layout>
+
+    );
   }
 
   renderResetTouchable() {
-    return null;
+    //TODO: Probably have to change to TouchableOpacity
+      return (
+
+    );
   }
   render() {
     // Just for early testing...
@@ -147,14 +167,10 @@ class Timer extends PureComponent {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>{this.formatTime()}</Text>
-        <Button
-          title="Start"
-          className
-          color={styles.button}
-          onPress={() => this.setState({ active: true, started: true })}
-        />
+      // timer text
+      //start button
         <Text style={styles.text}> {this.state.started.toString()} </Text>
+        <Text style={styles.text}> {this.interval} </Text>
       </View>
     );
   }
