@@ -24,11 +24,13 @@ export class HomeScreen extends Component {
   render() {
     return (
       <Layout style={Styles.mainContainer}>
-        <Timer
-        active = {false}
-        start = {false}
-        totalDuration = {this.state.duration} />
-        <Layout>
+        <Layout style={Styles.topContainer}>
+          <Timer
+          active = {false}
+          start = {false}
+          totalDuration = {this.state.duration} />
+        </Layout>
+        <Layout style={Styles.bottomContainer}>
           {this._renderStopStartButtons()}
         </Layout>
       </Layout>
